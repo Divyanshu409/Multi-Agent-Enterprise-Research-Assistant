@@ -1,0 +1,43 @@
+{
+  "_comment": "Template only -- fill in <ACCOUNT_ID>, <REGION>, and the ECR image URI, then register with `aws ecs register-task-definition --cli-input-json file://deploy/ecs-task-def.json`. Not deployed by this project automatically -- see README 'Deploying to AWS' for the manual, cost-aware steps.",
+  "family": "multi-agent-research-assistant",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::<ACCOUNT_ID>:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::<ACCOUNT_ID>:role/researchAssistantTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "research-assistant",
+      "image": "<ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/research-assistant:latest",
+      "portMappings": [{"containerPort": 8000, "protocol": "tcp"}],
+      "essential": true,
+      "environment": [
+        {"name": "LLM_PROVIDER", "value": "anthropic"},
+        {"name": "EMBEDDING_PROVIDER", "value": "local-tfidf"}
+      ],
+      "secrets": [
+        {
+          "name": "ANTHROPIC_API_KEY",
+          "valueFrom": "arn:aws:secretsmanager:<REGION>:<ACCOUNT_ID>:secret:research-assistant/anthropic-api-key"
+        }
+      ],
+      "healthCheck": {
+        "command": ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/health')\" || exit 1"],
+        "interval": 30,
+        "timeout": 5,
+        "startPeriod": 15,
+        "retries": 3
+      },
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/research-assistant",
+          "awslogs-region": "<REGION>",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

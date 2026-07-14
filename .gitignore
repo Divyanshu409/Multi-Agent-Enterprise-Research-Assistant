@@ -1,0 +1,25 @@
+# secrets
+.env
+
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.venv/
+venv/
+
+data/processed/*
+!data/processed/.gitkeep
+
+mlruns/
+mlartifacts/
+
+eval/report.json
+eval/report.md
+
+.DS_Store
+.vscode/
+.idea/
+
+node_modules/

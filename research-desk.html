@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10-K Research Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #EBEAE2;
+    --paper-raised: #F6F5EF;
+    --paper-deep: #DEDCD0;
+    --ink: #1C1D1B;
+    --ink-soft: #5B5D57;
+    --ink-faint: #8B8C84;
+    --rule: #C7C4B4;
+    --navy: #2B3A55;
+    --navy-soft: #435170;
+    --aapl: #5B6472;
+    --aapl-bg: rgba(91,100,114,.12);
+    --msft: #2F6F5E;
+    --msft-bg: rgba(47,111,94,.12);
+    --nvda: #74862F;
+    --nvda-bg: rgba(116,134,47,.14);
+    --rust: #AE4530;
+    --rust-bg: rgba(174,69,48,.10);
+    --pass: #2F6F5E;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'IBM Plex Sans', -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ -webkit-text-size-adjust: 100%; }
+  body{
+    margin:0;
+    background:
+      linear-gradient(var(--paper), var(--paper));
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before{
+    content:"";
+    position: fixed; inset:0;
+    pointer-events:none;
+    opacity:.5;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(0,0,0,.018) 0px, rgba(0,0,0,.018) 1px, transparent 1px, transparent 3px);
+    z-index:0;
+  }
+  a{ color: var(--navy); }
+  button{ font-family: inherit; }
+
+  :focus-visible{ outline: 2px solid var(--navy); outline-offset: 2px; }
+
+  .page{
+    position: relative; z-index:1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 28px 20px 60px;
+  }
+
+  /* ---------- Masthead ---------- */
+  .masthead{
+    border-bottom: 1.5px solid var(--ink);
+    padding-bottom: 16px;
+    margin-bottom: 28px;
+    display:flex; flex-wrap:wrap; gap:14px 24px;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .masthead-title{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(28px, 5vw, 40px);
+    letter-spacing: -0.01em;
+    margin:0;
+  }
+  .masthead-sub{
+    margin: 4px 0 0;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    max-width: 46ch;
+  }
+  .masthead-right{
+    display:flex; flex-direction:column; align-items:flex-end; gap:10px;
+  }
+  .tickers{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+  .ticker{
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: .04em;
+    border: 1px solid var(--rule);
+    background: var(--paper-raised);
+    border-radius: 3px;
+    padding: 5px 9px;
+    cursor: pointer;
+    display:inline-flex; align-items:center; gap:6px;
+    color: var(--ink);
+    transition: border-color .15s ease, transform .1s ease;
+  }
+  .ticker:hover{ border-color: var(--ink-soft); }
+  .ticker:active{ transform: translateY(1px); }
+  .ticker .dot{ width:7px; height:7px; border-radius:50%; display:inline-block; }
+  .ticker.aapl .dot{ background: var(--aapl); }
+  .ticker.msft .dot{ background: var(--msft); }
+  .ticker.nvda .dot{ background: var(--nvda); }
+
+  .health-badge{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-soft);
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  .health-badge .dot{ width:7px; height:7px; border-radius:50%; background: var(--ink-faint); }
+  .health-badge.online .dot{ background: var(--pass); }
+  .health-badge.offline .dot{ background: var(--rust); }
+  .health-badge.checking .dot{ background: var(--navy-soft); }
+
+  /* ---------- Docket / query form ---------- */
+  .docket{
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 22px;
+    position: relative;
+  }
+  .docket-label{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display:block;
+    margin-bottom: 10px;
+  }
+  textarea#queryInput{
+    width:100%;
+    resize: vertical;
+    min-height: 84px;
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--ink);
+    background: transparent;
+    border: none;
+    border-bottom: 1.5px solid var(--rule);
+    padding: 4px 2px 12px;
+    line-height: 1.4;
+  }
+  textarea#queryInput::placeholder{ color: var(--ink-faint); font-style: italic; }
+  textarea#queryInput:focus{ border-bottom-color: var(--navy); }
+
+  .chips-row{
+    display:flex; flex-wrap:wrap; gap:8px;
+    margin-top: 14px;
+  }
+  .example-chip{
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    border: 1px dashed var(--rule);
+    background: transparent;
+    color: var(--ink-soft);
+    border-radius: 20px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .example-chip:hover{ border-color: var(--navy); color: var(--ink); }
+
+  .docket-footer{
+    display:flex; justify-content:flex-end; align-items:center; gap: 12px;
+    margin-top: 18px;
+  }
+  .hint-inline{ font-size:12px; color: var(--ink-faint); margin-right:auto; }
+  .file-btn{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: .03em;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    border-radius: 3px;
+    padding: 11px 20px;
+    cursor: pointer;
+    transition: background .15s ease, transform .08s ease;
+  }
+  .file-btn:hover{ background: var(--navy); }
+  .file-btn:active{ transform: translateY(1px); }
+  .file-btn:disabled{ background: var(--ink-faint); cursor: default; }
+
+  /* ---------- Error ---------- */
+  .error-card{
+    margin-top: 20px;
+    border-left: 3px solid var(--rust);
+    background: var(--rust-bg);
+    padding: 14px 16px;
+    font-size: 13.5px;
+    border-radius: 0 3px 3px 0;
+  }
+  .error-card strong{ display:block; font-family: var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color: var(--rust); margin-bottom:6px; }
+
+  /* ---------- Results ---------- */
+  .results{ margin-top: 34px; }
+  .section-eyebrow{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display:flex; align-items:center; gap:10px;
+    margin: 30px 0 14px;
+  }
+  .section-eyebrow::after{ content:""; flex:1; height:1px; background: var(--rule); }
+  .section-eyebrow:first-child{ margin-top:0; }
+
+  /* Agent trail */
+  .trail{
+    display:flex; flex-wrap:wrap; align-items:center; gap: 4px 2px;
+  }
+  .stamp{
+    border: 1.5px solid var(--rule);
+    border-radius: 4px;
+    background: var(--paper-raised);
+    padding: 9px 12px;
+    min-width: 92px;
+    text-align:center;
+    opacity:0;
+    animation: stampIn .35s ease forwards;
+  }
+  .stamp .s-node{
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .stamp .s-mark{
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    margin: 3px 0 1px;
+    white-space: nowrap;
+  }
+  .stamp .s-time{ font-family: var(--font-mono); font-size: 9.5px; color: var(--ink-faint); }
+  .stamp.pass{ border-color: var(--pass); }
+  .stamp.pass .s-mark{ color: var(--pass); }
+  .stamp.fail{ border-color: var(--rust); }
+  .stamp.fail .s-mark{ color: var(--rust); }
+  .stamp.finalizer.forced{ border-color: var(--rust); background: var(--rust-bg); }
+  .trail-arrow{
+    font-family: var(--font-mono);
+    color: var(--ink-faint);
+    font-size: 14px;
+    padding: 0 2px;
+    opacity:0;
+    animation: stampIn .35s ease forwards;
+  }
+  .trail-arrow.sentback{ color: var(--rust); font-size: 11px; text-align:center; }
+
+  @keyframes stampIn{
+    from{ opacity:0; transform: translateY(4px) scale(.97); }
+    to{ opacity:1; transform: translateY(0) scale(1); }
+  }
+
+  .stats-row{
+    display:flex; flex-wrap:wrap; gap: 22px;
+    margin-top: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .stats-row b{ color: var(--ink); font-weight:600; }
+
+  .forced-banner{
+    margin-top: 18px;
+    border-left: 3px solid var(--rust);
+    background: var(--rust-bg);
+    padding: 14px 16px;
+    border-radius: 0 3px 3px 0;
+  }
+  .forced-banner strong{
+    display:block; font-family: var(--font-mono); font-size:11px;
+    letter-spacing:.08em; text-transform:uppercase; color: var(--rust); margin-bottom:6px;
+  }
+  .forced-banner ul{ margin: 8px 0 0; padding-left: 18px; font-size: 12.5px; color: var(--ink-soft); }
+  .forced-banner li{ font-family: var(--font-mono); font-size: 11.5px; margin-bottom:3px; }
+
+  /* Answer */
+  .answer-box{
+    font-family: var(--font-body);
+    font-size: 15.5px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 20px 22px;
+  }
+  .chip{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    background: var(--paper-deep);
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .chip-aapl{ background: var(--aapl-bg); color: var(--aapl); }
+  .chip-msft{ background: var(--msft-bg); color: var(--msft); }
+  .chip-nvda{ background: var(--nvda-bg); color: var(--nvda); }
+
+  /* Sources */
+  .sources-grid{ display:flex; flex-wrap:wrap; gap: 8px; }
+  .source-card{
+    display:flex; align-items:center; gap:7px;
+    border: 1px solid var(--rule);
+    background: var(--paper-raised);
+    border-radius: 20px;
+    padding: 6px 12px 6px 10px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+  }
+  .source-card .dot{ width:7px; height:7px; border-radius:50%; }
+  .source-card.aapl .dot{ background: var(--aapl); }
+  .source-card.msft .dot{ background: var(--msft); }
+  .source-card.nvda .dot{ background: var(--nvda); }
+  .source-card.other .dot{ background: var(--ink-faint); }
+
+  /* Subtasks */
+  .subtask-list{ margin:0; padding-left: 20px; font-size: 13.5px; color: var(--ink-soft); }
+  .subtask-list li{ margin-bottom: 4px; }
+
+  /* Empty state */
+  .empty-state{
+    margin-top: 40px;
+    text-align:center;
+    padding: 30px 20px;
+    color: var(--ink-faint);
+    font-size: 13px;
+  }
+  .empty-state .glyph{ font-family: var(--font-display); font-size: 26px; color: var(--ink-faint); margin-bottom:6px; }
+
+  /* Footer / config */
+  footer{
+    margin-top: 50px;
+    border-top: 1px solid var(--rule);
+    padding-top: 16px;
+    display:flex; flex-wrap:wrap; gap:10px 16px;
+    align-items:center;
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+  footer input{
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    border: 1px solid var(--rule);
+    background: var(--paper-raised);
+    border-radius: 3px;
+    padding: 6px 9px;
+    color: var(--ink-soft);
+    width: 230px;
+    max-width: 50vw;
+  }
+  footer button{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    border: 1px solid var(--rule);
+    background: transparent;
+    border-radius: 3px;
+    padding: 6px 10px;
+    cursor:pointer;
+    color: var(--ink-soft);
+  }
+  footer button:hover{ border-color: var(--navy); color: var(--ink); }
+
+  @media (max-width: 560px){
+    .masthead{ flex-direction:column; align-items:flex-start; }
+    .masthead-right{ align-items:flex-start; }
+    footer{ flex-direction:column; align-items:flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <div>
+      <h1 class="masthead-title">10-K Research Desk</h1>
+      <p class="masthead-sub">A multi-agent desk that plans, retrieves, drafts, and self-checks cited answers over Apple, Microsoft, and NVIDIA filings.</p>
+    </div>
+    <div class="masthead-right">
+      <div class="tickers">
+        <button class="ticker aapl" data-example="How is Apple exposed to tariffs on Chinese-manufactured hardware?"><span class="dot"></span>AAPL</button>
+        <button class="ticker msft" data-example="How does Microsoft describe capital expenditure risk from its AI and cloud buildout?"><span class="dot"></span>MSFT</button>
+        <button class="ticker nvda" data-example="How is NVIDIA exposed to export controls in China?"><span class="dot"></span>NVDA</button>
+      </div>
+      <span class="health-badge checking" id="healthBadge"><span class="dot"></span>checking…</span>
+    </div>
+  </header>
+
+  <main>
+    <form class="docket" id="queryForm">
+      <label class="docket-label" for="queryInput">Ask the desk a question</label>
+      <textarea id="queryInput" placeholder="e.g. How is NVIDIA exposed to export controls in China?"></textarea>
+      <div class="chips-row">
+        <button type="button" class="example-chip" data-example="How is Apple exposed to tariffs on Chinese-manufactured hardware?">Apple &middot; tariff exposure</button>
+        <button type="button" class="example-chip" data-example="How does Microsoft describe capital expenditure risk from its AI and cloud buildout?">Microsoft &middot; AI capex risk</button>
+        <button type="button" class="example-chip" data-example="How is NVIDIA exposed to export controls in China?">NVIDIA &middot; export controls</button>
+        <button type="button" class="example-chip" data-example="Compare how Apple, Microsoft, and NVIDIA each describe China-related regulatory risk.">Compare all three &middot; China risk</button>
+      </div>
+      <div class="docket-footer">
+        <span class="hint-inline" id="loadingHint"></span>
+        <button type="submit" class="file-btn" id="fileBtn">File query &rarr;</button>
+      </div>
+    </form>
+
+    <div id="errorSlot"></div>
+
+    <section class="results" id="results" hidden>
+      <div class="section-eyebrow">Agent trail</div>
+      <div class="trail" id="trail"></div>
+      <div class="stats-row" id="statsRow"></div>
+      <div id="forcedSlot"></div>
+
+      <div class="section-eyebrow">Answer</div>
+      <div class="answer-box" id="answerBox"></div>
+
+      <div class="section-eyebrow">Sources cited</div>
+      <div class="sources-grid" id="sourcesGrid"></div>
+
+      <div class="section-eyebrow">Subtasks worked</div>
+      <ol class="subtask-list" id="subtaskList"></ol>
+    </section>
+
+    <div class="empty-state" id="emptyState">
+      <div class="glyph">&mdash;</div>
+      File a question above. The desk will show its planning, retrieval, drafting, and review steps as it works.
+    </div>
+  </main>
+
+  <footer>
+    <span>API base</span>
+    <input id="apiBaseInput" value="http://localhost:8000" spellcheck="false">
+    <button type="button" id="recheckBtn">Recheck</button>
+    <span style="margin-left:auto;">If this page can't reach the API, add CORS to your FastAPI app &mdash; see chat for the snippet.</span>
+  </footer>
+
+</div>
+
+<script>
+  const state = { apiBase: document.getElementById('apiBaseInput').value.trim() };
+
+  const els = {
+    healthBadge: document.getElementById('healthBadge'),
+    form: document.getElementById('queryForm'),
+    queryInput: document.getElementById('queryInput'),
+    fileBtn: document.getElementById('fileBtn'),
+    loadingHint: document.getElementById('loadingHint'),
+    errorSlot: document.getElementById('errorSlot'),
+    results: document.getElementById('results'),
+    emptyState: document.getElementById('emptyState'),
+    trail: document.getElementById('trail'),
+    statsRow: document.getElementById('statsRow'),
+    forcedSlot: document.getElementById('forcedSlot'),
+    answerBox: document.getElementById('answerBox'),
+    sourcesGrid: document.getElementById('sourcesGrid'),
+    subtaskList: document.getElementById('subtaskList'),
+    apiBaseInput: document.getElementById('apiBaseInput'),
+    recheckBtn: document.getElementById('recheckBtn'),
+  };
+
+  function escapeHtml(s){
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function detectCompany(str){
+    const s = str.toUpperCase();
+    if (s.includes('AAPL') || s.includes('APPLE')) return 'aapl';
+    if (s.includes('MSFT') || s.includes('MICROSOFT')) return 'msft';
+    if (s.includes('NVDA') || s.includes('NVIDIA')) return 'nvda';
+    return null;
+  }
+  const COMPANY_NAME = { aapl: 'Apple', msft: 'Microsoft', nvda: 'NVIDIA' };
+
+  // ---------- Health check ----------
+  async function checkHealth(){
+    els.healthBadge.className = 'health-badge checking';
+    els.healthBadge.innerHTML = '<span class="dot"></span>checking…';
+    try{
+      const res = await fetch(state.apiBase + '/health');
+      if(!res.ok) throw new Error('status ' + res.status);
+      const data = await res.json();
+      els.healthBadge.className = 'health-badge online';
+      els.healthBadge.innerHTML = `<span class="dot"></span>live &middot; ${escapeHtml(data.llm_provider || '')} &middot; ${data.index_size ?? '?'} chunks`;
+      els.healthBadge.title = '';
+    }catch(err){
+      els.healthBadge.className = 'health-badge offline';
+      els.healthBadge.innerHTML = '<span class="dot"></span>offline';
+      els.healthBadge.title = 'Could not reach ' + state.apiBase + '/health (' + err.message + ')';
+    }
+  }
+
+  els.recheckBtn.addEventListener('click', () => {
+    state.apiBase = els.apiBaseInput.value.trim().replace(/\/$/, '');
+    checkHealth();
+  });
+  els.apiBaseInput.addEventListener('change', () => {
+    state.apiBase = els.apiBaseInput.value.trim().replace(/\/$/, '');
+  });
+
+  // ---------- Example chips ----------
+  document.querySelectorAll('[data-example]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      els.queryInput.value = btn.getAttribute('data-example');
+      els.queryInput.focus();
+    });
+  });
+
+  // ---------- Submit ----------
+  els.form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const query = els.queryInput.value.trim();
+    if(!query) return;
+    setLoading(true);
+    clearError();
+    try{
+      const res = await fetch(state.apiBase + '/query', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query })
+      });
+      const data = await res.json().catch(() => null);
+      if(!res.ok){
+        const detail = data && data.detail
+          ? (typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail))
+          : ('Request failed with status ' + res.status);
+        throw new Error(detail);
+      }
+      renderResults(data);
+    }catch(err){
+      showError(err.message);
+    }finally{
+      setLoading(false);
+    }
+  });
+
+  function setLoading(isLoading){
+    els.fileBtn.disabled = isLoading;
+    els.fileBtn.textContent = isLoading ? 'Filing…' : 'File query →';
+    els.loadingHint.textContent = isLoading ? 'Planning, retrieving, drafting, reviewing…' : '';
+  }
+
+  function clearError(){ els.errorSlot.innerHTML = ''; }
+  function showError(message){
+    let hint = '';
+    if(/Failed to fetch|NetworkError|TypeError/i.test(message)){
+      hint = 'The desk could not reach the API. Confirm uvicorn is running at ' + escapeHtml(state.apiBase) + ' and that CORS is enabled on the server.';
+    }
+    els.errorSlot.innerHTML = `<div class="error-card"><strong>Filing rejected</strong>${escapeHtml(hint || message)}${hint ? `<div style="margin-top:6px;color:var(--ink-soft);">${escapeHtml(message)}</div>` : ''}</div>`;
+  }
+
+  // ---------- Render results ----------
+  function renderResults(data){
+    els.emptyState.hidden = true;
+    els.results.hidden = false;
+
+    renderTrail(data.trace || []);
+    renderStats(data);
+    renderForced(data.trace || []);
+    renderAnswer(data.final_answer || '');
+    renderSources(data.citations || []);
+    renderSubtasks(data.subtasks || []);
+  }
+
+  function nodeMark(step){
+    const summary = step.output_summary || '';
+    if(step.node === 'critic'){
+      const m = summary.match(/verdict=(\w+)/i);
+      return m ? m[1].toUpperCase() : '?';
+    }
+    if(step.node === 'planner'){
+      const m = summary.match(/^(\d+)\s*subtask/i);
+      return m ? m[1] + ' subtask' + (m[1] === '1' ? '' : 's') : 'planned';
+    }
+    if(step.node === 'retriever'){
+      const m = summary.match(/(\d+)\s*unique chunk/i);
+      return m ? m[1] + ' chunks' : 'retrieved';
+    }
+    if(step.node === 'writer'){
+      const m = summary.match(/draft (v\d+)/i);
+      return m ? m[1] : 'drafted';
+    }
+    if(step.node === 'finalizer'){
+      return /force_finalized=true/i.test(summary) ? 'forced' : 'final';
+    }
+    return '';
+  }
+
+  function renderTrail(trace){
+    els.trail.innerHTML = '';
+    trace.forEach((step, i) => {
+      if(i > 0){
+        const prev = trace[i-1];
+        const prevVerdict = prev.node === 'critic' ? (prev.output_summary || '').match(/verdict=(\w+)/i) : null;
+        const arrow = document.createElement('span');
+        if(prevVerdict && prevVerdict[1].toUpperCase() === 'FAIL' && step.node === 'writer'){
+          arrow.className = 'trail-arrow sentback';
+          arrow.textContent = '↺ sent back';
+        } else {
+          arrow.className = 'trail-arrow';
+          arrow.textContent = '→';
+        }
+        arrow.style.animationDelay = (i * 90) + 'ms';
+        els.trail.appendChild(arrow);
+      }
+      const mark = nodeMark(step);
+      const isForced = step.node === 'finalizer' && /force_finalized=true/i.test(step.output_summary || '');
+      const verdictClass = step.node === 'critic'
+        ? (mark === 'PASS' ? 'pass' : 'fail')
+        : (isForced ? 'forced' : '');
+      const stamp = document.createElement('div');
+      stamp.className = 'stamp ' + step.node + (verdictClass ? ' ' + verdictClass : '') + (isForced ? ' finalizer forced' : '');
+      stamp.style.animationDelay = (i * 90) + 'ms';
+      stamp.innerHTML = `
+        <div class="s-node">${escapeHtml(step.node)}</div>
+        <div class="s-mark">${escapeHtml(mark)}</div>
+        <div class="s-time">${(step.duration_s ?? 0).toFixed ? step.duration_s.toFixed(2) : step.duration_s}s</div>
+      `;
+      els.trail.appendChild(stamp);
+    });
+  }
+
+  function renderStats(data){
+    els.statsRow.innerHTML = `
+      <span>Revisions used: <b>${data.revision_count ?? 0}</b></span>
+      <span>Retrieval expansions used: <b>${data.retrieval_expansion_count ?? 0}</b></span>
+      <span>Nodes run: <b>${(data.nodes_run || []).length}</b></span>
+      <span>Citations: <b>${(data.citations || []).length}</b></span>
+    `;
+  }
+
+  function renderForced(trace){
+    const finalizerStep = trace.find(s => s.node === 'finalizer');
+    const forced = finalizerStep && /force_finalized=true/i.test(finalizerStep.output_summary || '');
+    if(!forced){ els.forcedSlot.innerHTML = ''; return; }
+    const criticNotes = trace
+      .filter(s => s.node === 'critic')
+      .map((s, i) => `<li>critic pass ${i+1}: ${escapeHtml(s.output_summary || '')}</li>`)
+      .join('');
+    els.forcedSlot.innerHTML = `
+      <div class="forced-banner">
+        <strong>Force-finalized</strong>
+        The revision budget ran out before the critic fully passed this draft. Treat the answer below as a best-effort result, not a fully verified one.
+        <ul>${criticNotes}</ul>
+      </div>
+    `;
+  }
+
+  function renderAnswer(text){
+    const caveats = [];
+    let mainText = text;
+
+    // The mock critic's trailing note is appended as "[Note: ... ]" but can itself
+    // contain a nested bracket (e.g. "[Automated check]"), so simple bracket-matching
+    // regex mismatches the pair. Slice it out explicitly: from the "[Note:" marker to
+    // the LAST "]" in the string, rather than the first one after it.
+    const noteIdx = mainText.search(/\[Note:/i);
+    if(noteIdx !== -1){
+      const lastBracketIdx = mainText.lastIndexOf(']');
+      if(lastBracketIdx > noteIdx){
+        caveats.push(mainText.slice(noteIdx + 1, lastBracketIdx).trim());
+        mainText = mainText.slice(0, noteIdx) + mainText.slice(lastBracketIdx + 1);
+      }
+    }
+
+    // Any other non-nested "[free text with spaces]" segments are caveats too.
+    let cleaned = mainText.replace(/\[([^\[\]]*\s[^\[\]]*)\]/g, (m, inner) => {
+      caveats.push(inner.trim());
+      return '';
+    }).replace(/[ \t]{2,}/g, ' ').trim();
+
+    let escaped = escapeHtml(cleaned);
+    escaped = escaped.replace(/\[([^\]\s]+)\]/g, (m, id) => {
+      const co = detectCompany(id);
+      const cls = co ? `chip chip-${co}` : 'chip';
+      return `<span class="${cls}">${id}</span>`;
+    });
+
+    let html = `<div>${escaped || '<span style="color:var(--ink-faint)">No answer text returned.</span>'}</div>`;
+    if(caveats.length){
+      html += caveats.map(c => `<div class="forced-banner" style="margin-top:14px;"><strong>Note</strong>${escapeHtml(c.replace(/^Note:\s*/i, ''))}</div>`).join('');
+    }
+    els.answerBox.innerHTML = html;
+  }
+
+  function renderSources(citations){
+    if(!citations.length){
+      els.sourcesGrid.innerHTML = '<span style="color:var(--ink-faint);font-size:12.5px;">No citations returned.</span>';
+      return;
+    }
+    els.sourcesGrid.innerHTML = citations.map(c => {
+      const co = detectCompany(c) || 'other';
+      const label = COMPANY_NAME[co] || 'Filing';
+      return `<span class="source-card ${co}"><span class="dot"></span>${escapeHtml(label)} &middot; ${escapeHtml(c)}</span>`;
+    }).join('');
+  }
+
+  function renderSubtasks(subtasks){
+    if(!subtasks.length){
+      els.subtaskList.innerHTML = '<li style="color:var(--ink-faint);">None recorded.</li>';
+      return;
+    }
+    els.subtaskList.innerHTML = subtasks.map(s => `<li>${escapeHtml(s)}</li>`).join('');
+  }
+
+  checkHealth();
+</script>
+</body>
+</html>

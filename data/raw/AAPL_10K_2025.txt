@@ -1,0 +1,144 @@
+SOURCE: Apple Inc. Form 10-K, Fiscal Year Ended September 27, 2025
+COMPANY: Apple Inc. (AAPL)
+FILED: 2025-10-31
+URL: https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm
+SECTIONS INCLUDED: Item 1 (Business), Item 1A (Risk Factors), Item 1C (Cybersecurity), Item 2 (Properties), Item 3 (Legal Proceedings), Item 5 (Market for Common Equity), Item 7 (MD&A, partial)
+================================================================================
+
+ITEM 1. BUSINESS
+
+Company Background
+The Company designs, manufactures and markets smartphones, personal computers, tablets, wearables and accessories, and sells a variety of related services. The Company's fiscal year is the 52- or 53-week period that ends on the last Saturday of September.
+
+Products
+iPhone is the Company's line of smartphones based on its iOS operating system. The iPhone line includes iPhone 17 Pro, iPhone Air, iPhone 17, iPhone 16 and iPhone 16e.
+Mac is the Company's line of personal computers based on its macOS operating system. The Mac line includes laptops MacBook Air and MacBook Pro, as well as desktops iMac, Mac mini, Mac Studio and Mac Pro.
+iPad is the Company's line of multipurpose tablets based on its iPadOS operating system. The iPad line includes iPad Pro, iPad Air, iPad and iPad mini.
+Wearables includes smartwatches, wireless headphones and spatial computers. The Company's line of smartwatches includes Apple Watch Series 11, Apple Watch SE 3 and Apple Watch Ultra 3. Wireless headphones include AirPods, AirPods Pro, AirPods Max and Beats products. Apple Vision Pro is the Company's spatial computer based on its visionOS operating system.
+Home includes Apple TV 4K and HomePod / HomePod mini.
+Accessories includes Apple-branded and third-party accessories.
+
+Services
+Advertising: third-party licensing arrangements and the Company's own advertising platforms.
+AppleCare: fee-based service and support products, priority access to Apple technical support and the global authorized service network.
+Cloud Services: store and keep customers' content up-to-date and available across multiple Apple devices and Windows PCs.
+Digital Content: the App Store and subscription services including Apple Arcade, Apple Fitness+, Apple Music, Apple News+ and Apple TV.
+Payment Services: Apple Card and Apple Pay.
+
+Segments
+The Company manages its business primarily on a geographic basis: Americas, Europe, Greater China, Japan and Rest of Asia Pacific. During 2025, net sales through direct and indirect distribution channels accounted for 40% and 60%, respectively, of total net sales.
+
+Competition
+The markets for the Company's products and services are highly competitive, characterized by aggressive price competition, downward pressure on gross margins, continual improvement in product performance, and price sensitivity. The Company has a minority market share in the global smartphone, personal computer, tablet and wearables markets.
+
+Supply of Components
+Most components are generally available from multiple sources, but certain components are currently obtained from single or limited sources. Restrictions on international trade can increase the cost or limit the availability of the Company's products and the components and rare earths and other raw materials that go into them. New products often utilize custom components available from only one source.
+
+Research and Development
+The Company continues to develop new technologies to enhance existing products and services through R&D, licensing of intellectual property and acquisition of third-party businesses and technology.
+
+Intellectual Property
+The Company holds a broad collection of patents, designs, copyrights, trademarks and trade secrets in the U.S. and various foreign countries, and relies primarily on the innovative skills, technical competence and marketing abilities of its personnel.
+
+Human Capital
+As of September 27, 2025, the Company had approximately 166,000 full-time equivalent employees. The Company offers discretionary cash and equity awards, health, wellness and time-away benefits, and career development programs through Apple University.
+
+ITEM 1A. RISK FACTORS
+
+Macroeconomic and Industry Risks
+The Company's operations and performance depend significantly on global and regional economic conditions. International operations account for a majority of total net sales, and the global supply chain is large and complex, with a majority of supplier facilities located outside the U.S. Adverse macroeconomic conditions, including slow growth or recession, high unemployment, inflation, tighter credit, higher interest rates, and currency fluctuations, can adversely impact consumer confidence and spending.
+
+Beginning in the second quarter of 2025, new tariffs were announced on imports to the U.S., including additional tariffs on imports from China, India, Japan, South Korea, Taiwan, Vietnam and the EU. Several countries have imposed or threatened reciprocal tariffs. The U.S. Department of Commerce has initiated a Section 232 investigation into imports of semiconductors, semiconductor manufacturing equipment, and their derivative products. The ultimate impact of these trade measures remains uncertain.
+
+A significant majority of the Company's manufacturing is performed by outsourcing partners located primarily in China mainland, India, Japan, South Korea, Taiwan and Vietnam. Many of these facilities are prone to earthquakes and other natural disasters, and global climate change is resulting in more frequent or more intense extreme weather events.
+
+Global markets for the Company's products and services are highly competitive and subject to rapid technological change. The Company must make significant R&D investments that may not achieve expected returns.
+
+Business Risks
+The Company depends on component and product manufacturing and logistical services provided by outsourcing partners, many outside the U.S. The Company relies on single-source partners for many components and on partners primarily in Asia for final assembly of substantially all hardware products, which reduces direct control over production and distribution.
+
+The Company is exposed to significant supply and pricing risk because certain components are obtained from single or limited sources. New products often utilize custom components available from only one source, and initial capacity constraints may exist until suppliers' yields have matured.
+
+The introduction of new and complex technologies, such as artificial intelligence features, can increase safety risks, including exposing users to harmful, inaccurate or other negative content and experiences. The use of machine learning and artificial intelligence can involve the acquisition and use of copyrighted materials for training as well as potential reproduction of copyrighted materials in outputs, which may expose the Company to intellectual property infringement claims.
+
+The Company's future performance depends in part on support from third-party software developers, who may be less inclined to develop for Apple's platforms given the Company's minority market share versus Android, Windows, PlayStation, Nintendo and Xbox.
+
+The Company's business and reputation are impacted by information technology system failures and network disruptions, including from ransomware, cybersecurity incidents, and acts of war or terrorism.
+
+Losses or unauthorized access to confidential information, including personal, health and financial information of customers and employees, could subject the Company to significant reputational, financial, legal and operational consequences. The Company is at relatively greater risk of being targeted given its high profile.
+
+Legal and Regulatory Compliance Risks
+The Company is subject to complex and changing laws and regulations worldwide, including antitrust, privacy and data security, online safety, age verification, consumer protection, and machine learning / artificial intelligence regulation.
+
+Digital Markets Act: On April 23, 2025, the European Commission fined the Company EUR 500 million in the Article 5(4) Investigation and issued a cease-and-desist order requiring removal of restrictions on developers steering users to alternative distribution channels outside the App Store. A separate Article 6(4) Investigation could result in fines up to 10% of annual worldwide net sales.
+
+The Company is subject to civil antitrust lawsuits in the U.S. alleging monopolization in the markets for "performance smartphones" and "smartphones" generally, filed by the DOJ and state attorneys general on March 21, 2024.
+
+Epic Games litigation: On April 30, 2025, the California District Court found the Company in violation of the 2021 Injunction and enjoined it from imposing any commission on purchases made outside an app, referring the Company for a determination on criminal contempt proceedings. The Company has appealed to the Ninth Circuit, which upheld the injunction in part on December 11, 2025 while allowing parity requirements for in-app vs. external purchase links, and held the Company can charge commission on link-out purchases.
+
+The Company earns revenue from a search-services licensing arrangement with Google, which was found to have violated U.S. antitrust laws (August 5, 2024); a September 2, 2025 remedies order from the D.C. District Court is subject to appeal by both the DOJ and Google, and a reversal could affect Apple's search-distribution revenue.
+
+Risks related to the collection, use and transfer of personal data continue to grow, particularly for health, biometric, financial and payment card data, and for data associated with minors under new online-safety and age-verification laws.
+
+Financial Risks
+Net sales and gross margins are subject to volatility from pricing pressure, competition, tariffs, currency fluctuations, and product mix shifts. The Company generates a significant portion of net sales from a single product category (iPhone).
+
+Foreign exchange rate movements affect the U.S. dollar value of non-U.S.-dollar-denominated sales, costs and margins. The Company uses derivative instruments to hedge certain exposures, which may not fully offset adverse currency movements.
+
+The Company is subject to changes in tax rates and new U.S. or international tax legislation, including OECD proposals for global minimum tax standards.
+
+General Risks
+The Company's stock has experienced substantial price volatility and may continue to do so, potentially unrelated to operating performance.
+
+ITEM 1C. CYBERSECURITY
+The Company's Head of Corporate Information Security has overall responsibility for identifying, assessing and managing material cybersecurity risks, leading a dedicated Information Security team. The Audit and Finance Committee of the Board assists in oversight of cybersecurity matters and receives regular updates on incidents.
+
+ITEM 2. PROPERTIES
+Headquarters located in Cupertino, California. As of September 27, 2025, the Company owned or leased facilities for corporate functions, R&D, data centers, retail and other purposes throughout the U.S. and internationally.
+
+ITEM 3. LEGAL PROCEEDINGS
+Digital Markets Act investigations (Article 5(4) and Article 6(4)), DOJ antitrust lawsuit regarding smartphone monopolization, and the Epic Games litigation regarding App Store commissions are the Company's principal disclosed legal proceedings, summarized above under Risk Factors.
+
+ITEM 5. MARKET FOR REGISTRANT'S COMMON EQUITY
+Common stock trades on Nasdaq under the symbol AAPL. As of October 17, 2025, there were 22,429 shareholders of record. On May 1, 2025, the Company announced a program to repurchase up to $100 billion of common stock, in addition to the $110 billion program announced May 2, 2024 (fully utilized in Q4 2025).
+
+Five-year cumulative total shareholder return (dividend-reinvested, $100 invested Sept 25, 2020): Apple grew to $234 by September 2025, versus $217 for the S&P 500 Index and $287 for the Dow Jones U.S. Technology Total Stock Market Index.
+
+ITEM 7. MANAGEMENT'S DISCUSSION AND ANALYSIS (MD&A)
+
+Tariffs and Other Measures
+Beginning in Q2 2025, new U.S. tariffs were announced on imports from China, India, Japan, South Korea, Taiwan, Vietnam and the EU. These tariffs and any retaliatory measures can materially affect the Company's supply chain, pricing and gross margin; the ultimate impact remains uncertain.
+
+Segment Operating Performance (net sales, dollars in millions):
+Americas: $178,353 (2025), +7% vs $167,045 (2024), +3% vs $162,560 (2023)
+Europe: $111,032 (2025), +10% vs $101,328 (2024), +7% vs $94,294 (2023)
+Greater China: $64,377 (2025), -4% vs $66,952 (2024), -8% vs $72,559 (2023)
+Japan: $28,703 (2025), +15% vs $25,052 (2024), +3% vs $24,257 (2023)
+Rest of Asia Pacific: $33,696 (2025), +10% vs $30,658 (2024), +4% vs $29,615 (2023)
+Total net sales: $416,161 million (2025), +6% vs $391,035 million (2024), +2% vs $383,285 million (2023)
+
+Greater China net sales decreased during 2025 compared to 2024 primarily due to lower net sales of iPhone, partially offset by higher net sales of Mac. All other geographic segments grew, driven mainly by iPhone and Services.
+
+Products and Services Performance (net sales, dollars in millions):
+iPhone: $209,586 (2025), +4% vs $201,183 (2024)
+Mac: $33,708 (2025), +12% vs $29,984 (2024)
+iPad: $28,023 (2025), +5% vs $26,694 (2024)
+Wearables, Home and Accessories: $35,686 (2025), -4% vs $37,005 (2024)
+Services: $109,158 (2025), +14% vs $96,169 (2024)
+
+Gross Margin (dollars in millions):
+Products gross margin: $112,887 (2025) vs $109,633 (2024); gross margin % 36.8% (2025) vs 37.2% (2024) -- decreased primarily due to product mix and tariff costs.
+Services gross margin: $82,314 (2025) vs $71,050 (2024); gross margin % 75.4% (2025) vs 73.9% (2024).
+Total gross margin percentage: 46.9% (2025) vs 46.2% (2024) vs 44.1% (2023).
+
+Operating Expenses (dollars in millions):
+R&D: $34,550 (2025), +10% vs $31,370 (2024), 8% of net sales in both years. Growth driven by headcount and infrastructure-related costs.
+SG&A: $27,601 (2025), +6% vs $26,097 (2024), 7% of net sales.
+Total operating expenses: $62,151 million (2025), +8% vs $57,467 million (2024).
+
+Provision for Income Taxes:
+Provision: $20,719 million (2025) vs $29,749 million (2024) vs $16,741 million (2023).
+Effective tax rate: 15.6% (2025) vs 24.1% (2024) vs 14.7% (2023); statutory federal rate 21% in all years. The 2025 effective rate was lower than 2024 due mainly to a $10.7 billion year-over-year decrease in the provision related to the State Aid Decision.
+
+Liquidity and Capital Resources
+Cash, cash equivalents and marketable securities totaled $132.4 billion as of September 27, 2025. Outstanding fixed-rate notes totaled $91.3 billion principal, with $12.4 billion payable within 12 months. Manufacturing purchase obligations were $56.2 billion, with $55.4 billion payable within 12 months. The deemed repatriation tax payable under the 2017 Tax Cuts and Jobs Act stood at $8.8 billion, payable within 12 months. The Company believes existing liquidity, ongoing operating cash flow and continued access to debt markets will be sufficient to meet cash requirements and its capital return program over the next 12 months and beyond.

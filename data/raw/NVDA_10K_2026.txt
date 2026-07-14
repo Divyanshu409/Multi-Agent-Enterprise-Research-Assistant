@@ -1,0 +1,61 @@
+SOURCE: NVIDIA Corporation Form 10-K, Fiscal Year Ended January 25, 2026
+COMPANY: NVIDIA Corporation (NVDA)
+FILED: ~February 2026
+URL: https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm
+SECTIONS INCLUDED: Item 1 (Business), Item 1A (Risk Factors, partial), Item 7 (MD&A, supplemented with Q4/full-year FY2026 earnings release figures, both primary company sources)
+================================================================================
+
+ITEM 1. BUSINESS
+
+Company Overview
+NVIDIA describes itself as having pioneered accelerated computing and now positions itself as a data-center-scale AI infrastructure company. Its technology stack centers on the CUDA development platform plus hundreds of domain-specific libraries, SDKs and APIs. The company reports over $76.7 billion invested in R&D since inception. Key historical milestones cited: invention of the GPU (1999), CUDA (2006), the AlexNet ImageNet win on NVIDIA GPUs (2012), first Tensor Core GPU (2017), Mellanox acquisition (2020) enabling data-center-scale networking, first data-center CPU "Grace" (2023), Blackwell architecture launch (2024), and the Blackwell Ultra platform plus unveiling of the next-generation "Rubin" platform (fiscal 2026, with Rubin production shipments expected second half of fiscal 2027).
+
+Segments
+Compute & Networking: Data Center accelerated computing/networking platforms and AI software; Automotive autonomous/EV solutions.
+Graphics: GeForce GPUs (gaming/PC) and Quadro/NVIDIA RTX GPUs (enterprise workstation).
+
+Markets: Data Center, Gaming, Professional Visualization, and Automotive.
+NVIDIA states its computing/networking powers over 78% of supercomputers on the global TOP500 list and 9 of the top 10 systems on the Green500 list. Over 7.5 million developers worldwide use CUDA and related tools.
+
+Manufacturing
+NVIDIA uses a fabless model, relying on foundries including Taiwan Semiconductor Manufacturing Company (TSMC) and Samsung for wafer fabrication, and on suppliers including SK Hynix, Micron and Samsung for memory. It uses CoWoS advanced packaging technology and subcontracts assembly/test/packaging to firms including Hon Hai Precision (Foxconn), Wistron and Fabrinet. Supply chain is currently concentrated in Asia, with the company stating it is expanding into the U.S. and Latin America.
+
+Competition
+Named competitors include AMD, Huawei and Intel (GPUs/accelerated computing); Alibaba, Alphabet, Amazon, Baidu, Huawei and Microsoft (internal AI/CPU silicon at large cloud providers); and Arista, Broadcom, Cisco, Marvell and others in networking.
+
+Human Capital
+As of the end of fiscal year 2026, NVIDIA had approximately 42,000 employees in 38 countries (31,000 in R&D, 11,000 in sales/marketing/operations/admin). More than 80% hold technical roles; more than half hold an advanced degree. Fiscal 2026 turnover rate was reported at 3.7%.
+
+Government Regulation and Export Controls (Item 1, Business)
+NVIDIA describes a multi-year sequence of shifting U.S. export controls affecting China sales: August 2022 controls targeting A100/H100 chips to China and Russia; July 2023 extension of licensing requirements to additional regions; October 2023 new licensing requirements for China and "Country Group D" destinations (including Saudi Arabia, UAE, Vietnam) covering A100, A800, H100, H800, L4, L40, L40S, RTX 4090, GB200 NVL72 and B200 products; and an April 2025 requirement that H20 exports to China/Hong Kong/Macau and D:5 countries obtain a license.
+
+The April 2025 H20 licensing requirement drove a $4.5 billion charge in Q1 FY2026 for excess H20 inventory and purchase obligations. In August 2025 the U.S. government granted licenses allowing limited H20 shipment to China, generating approximately $60 million in H20 revenue; U.S. officials indicated an expectation (not codified in regulation) that the government would receive 15% or more of revenue from such licensed sales. In February 2026 a license was granted for limited H200 shipments to specific China-based customers, subject to a mandatory U.S. inspection process and a 25% import tariff upon any shipment; no H200 China revenue had been generated as of the filing date and it remained unclear whether China would permit the imports.
+
+NVIDIA states that under current U.S. and Chinese rules, it is unable to produce a China data-center product approved by both governments, and describes itself as "effectively foreclosed" from China's data-center computing market as of fiscal year-end 2026 -- a foreclosure the company says has helped competitors build larger developer ecosystems globally. A January 2025 "AI Diffusion" interim final rule that would have imposed worldwide tiered licensing was rescinded in May 2025 pending a replacement rule of uncertain scope; the filing also notes Senate passage (October 2025) of the "GAIN AI Act" within the NDAA, which would constrain the executive branch's ability to modify AI export-control rules.
+
+ITEM 1A. RISK FACTORS (selected)
+
+Industry and Market Risk
+NVIDIA discloses a nonrefundable IP license arrangement with Groq, Inc. requiring significant payments, with integration into NVIDIA's roadmap not guaranteed to succeed or occur on expected timelines.
+
+Demand, Supply and Manufacturing Risk
+The company describes long manufacturing lead times (previously extended beyond 12 months in shortage periods), non-cancellable purchase commitments, and history of both product shortages and excess-inventory writedowns. It names cryptocurrency mining demand volatility and "gray market" resale as factors that complicate demand forecasting. Frequent architecture transitions (annual Data Center product cadence) are described as amplifying supply/demand mismatch risk; Q2 FY2025 gross margin was cited as an example, negatively impacted by inventory provisions for low-yielding Blackwell material.
+
+Global Operations Risk
+NVIDIA reports generating 31% of fiscal 2026 revenue from sales outside the United States. It discloses monitoring the Israel conflict's impact on approximately 6,000 regional employees supporting networking R&D, operations and sales, noting periods of employee military duty causing limited disruption but no material impact to date.
+
+Customer Concentration
+For fiscal year 2026, sales to one direct customer represented 22% of total revenue and to a second direct customer represented 14% of total revenue, both primarily attributable to the Compute & Networking segment.
+
+Cybersecurity Risk
+NVIDIA discloses past security incidents involving its GeForce NOW (GFN) service exposing third-party partners' proprietary game source code, and states it has incorporated third-party and open-source datasets into AI model training that "may be flawed, insufficient, or contain certain biased information."
+
+Strategic Investment Risk
+The filing discloses NVIDIA was, as of the filing date, "finalizing an investment and partnership agreement with OpenAI," with no assurance the transaction would be completed.
+
+ITEM 7. MANAGEMENT'S DISCUSSION AND ANALYSIS (MD&A) -- selected figures
+(Note: figures below combine 10-K disclosure with NVIDIA's Q4/full-year FY2026 earnings release (Form 8-K, filed Feb. 25, 2026) and CFO commentary, both primary company sources, since the MD&A text itself was only partially available to the ingestion pipeline -- see build notes.)
+
+Full fiscal year 2026 (ended January 25, 2026): revenue $215.9 billion, up 65% year-over-year (prior year FY2025 revenue: $130.5 billion). GAAP operating income $130.4 billion; GAAP net income $120.1 billion (up 65% YoY). Full-year GAAP gross margin 71.1% (non-GAAP 71.3%). Full-year Data Center revenue $194-197 billion range across cited sources (up roughly 68-71% YoY from ~$115.2 billion in FY2025). Free cash flow was $97 billion for fiscal 2026 ($35 billion in Q4 alone). NVIDIA returned $41.1 billion to shareholders via buybacks and dividends in FY2026.
+
+Q4 FY2026 (quarter ended January 25, 2026): record quarterly revenue of $68.1 billion, up 20% sequentially and 73% year-over-year. Record Data Center revenue of $62.3 billion (+75% YoY, +22% sequentially); hyperscaler customers remained the largest Data Center customer category at just over 50% of segment revenue. Data Center compute revenue was $51.3 billion; Networking revenue $11.0 billion, up over 3.5x year-over-year, driven by NVLink ramp for GB200/GB300 systems and Ethernet/InfiniBand growth. Gaming revenue was up 47% YoY but down 13% sequentially on normal post-holiday channel inventory moderation; the company explicitly flagged supply constraints as an expected headwind to Gaming in Q1 FY2027 and beyond. Professional Visualization revenue was up 159% YoY. Automotive revenue was up 6% YoY. Q4 GAAP net income was approximately $43 billion (+94% YoY). Total supply-related purchase commitments grew from $50.3 billion (end of Q3 FY2026) to $95.2 billion (end of Q4 FY2026). Guidance for Q1 FY2027 revenue was approximately $78 billion.

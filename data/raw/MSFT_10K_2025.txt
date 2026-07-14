@@ -1,0 +1,65 @@
+SOURCE: Microsoft Corporation Form 10-K, Fiscal Year Ended June 30, 2025
+COMPANY: Microsoft Corporation (MSFT)
+FILED: 2025-07-30
+URL: https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm
+SECTIONS INCLUDED: Item 1 (Business), Item 1A (Risk Factors), Item 7 (MD&A, partial, supplemented with Q4 FY2025 earnings release figures)
+================================================================================
+
+ITEM 1. BUSINESS
+
+General
+Microsoft describes itself as a technology company focused on making digital technology and artificial intelligence available broadly and responsibly, with a stated mission to empower every person and organization on the planet to achieve more. The company frames AI as fundamentally transforming productivity across every layer of the technology stack.
+
+Operating Segments
+Microsoft reports three segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing. Beginning fiscal year 2025, the segment definitions changed to bring the commercial components of Microsoft 365 together under Productivity and Business Processes.
+
+Productivity and Business Processes includes Microsoft 365 Commercial and Consumer products and cloud services (including Microsoft 365 Copilot), LinkedIn, and Dynamics 365 / Dynamics on-premises applications.
+
+Intelligent Cloud includes Azure and other cloud services (cloud and AI consumption-based services, GitHub cloud services, Nuance Healthcare cloud services), on-premises server products (SQL Server, Windows Server, Visual Studio, System Center), and enterprise/partner services. Azure AI Foundry is described as a unified platform for developers to design, customize, and manage AI applications and agents.
+
+More Personal Computing includes Windows and Devices (OEM licensing, Surface), Gaming (Xbox hardware, content and services, Xbox Game Pass, Xbox Cloud Gaming), and Search and news advertising (Bing, Copilot, Microsoft Edge).
+
+Human Capital
+As of June 30, 2025, Microsoft employed approximately 228,000 people full-time (125,000 in the U.S., 103,000 internationally): roughly 89,000 in operations, 80,000 in product R&D, 44,000 in sales and marketing, and 15,000 in general/administration.
+
+Government Regulation
+Microsoft describes itself as subject to a wide range of privacy, telecommunications, data storage, advertising and online-content laws globally, including EU-specific compliance functions created for the Digital Markets Act and Digital Services Act.
+
+ITEM 1A. RISK FACTORS
+
+Strategic and Competitive Risks
+Microsoft faces intense competition across all markets, from diversified global companies to small specialized firms, in an environment with low barriers to entry and rapidly evolving technology. The company identifies competing business models as a key risk: platform-based ecosystems (vertically-integrated competitors controlling both hardware and software), free/ad-supported competitors, and open-source competitors that do not bear the full cost of R&D but can mimic product functionality.
+
+Microsoft states it is investing significantly in AI across the company and infusing generative AI into its offerings, bearing significant development and operational costs to build AI models, services, platforms and infrastructure. The filing explicitly flags risk that AI systems could be used in unintended or inappropriate ways, and that users may engage in fraudulent or abusive activity (unauthorized account access, payment fraud, cryptocurrency mining, cyberattacks) through its cloud/AI services.
+
+Significant investments (e.g., the October 2023 Activision Blizzard acquisition, and continued phases of the OpenAI strategic partnership announced January 2023) carry integration, goodwill-impairment, and strategic-alignment risk.
+
+Cybersecurity, Data Privacy, and Platform Abuse Risks
+Microsoft discloses that nation-state and criminal threat actors continuously attack its infrastructure and customers. It specifically references a disclosed incident (Form 8-K filed January 19, 2024, amended March 8, 2024) in which a nation-state-associated threat actor used a password-spray attack beginning in late November 2023 to compromise a legacy test account, subsequently gaining unauthorized access to Microsoft source code repositories and internal systems, with continued risk that the actor could use this access going forward.
+
+The filing describes AI-specific issues in a dedicated risk factor: AI algorithms or training methodologies may be flawed, training datasets may be biased or inaccurate, generated content may be offensive or harmful, and agentic AI systems that act autonomously may require human review of inputs/outputs. These risks are compounded by an evolving global regulatory landscape (e.g., the EU AI Act).
+
+Legal, Regulatory, and Litigation Risks
+Microsoft is subject to antitrust/competition-law scrutiny in the U.S., EU, UK and China, evolving AI-specific regulation (citing the EU AI Act's provisions on frontier model safety, transparency and content provenance), export/trade controls (including the since-rescinded "AI Diffusion Rule" governing AI chip exports and potential successor rulemaking), anti-corruption laws (FCPA), and data-protection regimes (GDPR, EU Data Act).
+
+The company discloses an ongoing IRS audit covering tax years 2004-2013 relating to intercompany transfer pricing, with the IRS seeking an additional tax payment of $28.9 billion plus penalties and interest through Notices of Proposed Adjustment.
+
+Intellectual Property Risks
+Microsoft flags risk from third-party claims of infringement, "including current copyright infringement and other claims arising from AI training and output," noting it has paid significant amounts historically to settle such claims and procure IP rights.
+
+Operational Risks
+Growing AI and cloud demand requires continued datacenter, GPU and networking investment; availability of buildable land, power and server components (including GPUs) is called out as a constraint, along with reliance on a limited supplier base for device and datacenter components.
+
+General Risks
+Catastrophic-event risk is elevated by Microsoft's concentration of R&D and headquarters operations in the seismically active Seattle, Washington and Silicon Valley, California areas. The company also names geopolitical instability (citing the Ukraine conflict and Israel-Hamas conflict) as a source of sanctions risk, operational disruption, and demand uncertainty.
+
+ITEM 7. MANAGEMENT'S DISCUSSION AND ANALYSIS (MD&A) -- selected figures
+(Note: figures below combine the FY2025 Form 10-K segment-revenue disclosure with Microsoft's Q4 FY2025 earnings release, both primary company sources, since the 10-K MD&A text itself was only partially available to the ingestion pipeline -- see build notes.)
+
+Microsoft Cloud revenue (Microsoft 365 Commercial cloud + Azure and other cloud services + commercial LinkedIn + Dynamics 365): $168.9 billion (FY2025) vs $137.7 billion (FY2024) vs $111.6 billion (FY2023).
+
+Full fiscal year 2025: Azure and other cloud services revenue surpassed $75 billion, up 34% year-over-year, with growth described as driven by all workloads.
+
+Q4 FY2025 (quarter ended June 30, 2025) results: total revenue $76.4 billion (+18% YoY); operating income $34.3 billion (+23% YoY); net income $27.2 billion (+24% YoY); diluted EPS $3.65 (+24% YoY). Q4 Intelligent Cloud segment revenue was $29.9 billion (+26% YoY), with server products and cloud services revenue up 27%, driven by Azure and other cloud services growth of 39%. Q4 More Personal Computing segment revenue was $13.5 billion (+9% YoY). Microsoft returned $9.4 billion to shareholders via dividends and share repurchases in Q4 FY2025.
+
+Across FY2025 quarters, Intelligent Cloud gross margin percentage was repeatedly described as decreasing due to the impact of scaling AI infrastructure, even as gross margin dollars grew from Azure revenue growth -- a recurring MD&A theme of AI infrastructure investment pressuring near-term margins while driving top-line cloud growth.
