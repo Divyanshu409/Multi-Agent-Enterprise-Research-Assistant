@@ -2,13 +2,64 @@
 
 A multi-agent system that plans, retrieves, drafts, and **self-verifies** cited
 answers to research questions over a corpus of SEC 10-K filings (Apple,
-Microsoft, NVIDIA). Built with LangGraph, FAISS, and swappable Claude/OpenAI
-providers.
+Microsoft, NVIDIA). Built with LangGraph, FAISS, and swappable Claude/OpenAI/
+Gemini providers.
 
 Unlike a single-shot RAG assistant, every draft answer here is checked by a
 separate critic agent against the retrieved evidence before it reaches the
 user — unsupported claims get sent back for revision (or trigger another
 retrieval pass) instead of shipping.
+
+## Demo
+
+The repo ships a static single-page frontend (`research-desk.html`) that
+talks to the `/query` and `/health` endpoints — no build step, just open it
+against a running API. A few screenshots from a live run:
+
+**The desk itself** — ask a question, or use one of the seeded prompts per
+company (or across all three). The status bar reports the active provider,
+model, and index size straight from `/health` (this run against
+`gemini:gemini-3-flash-preview`, 31 chunks indexed):
+
+![10-K Research Desk home screen](docs/screenshots/research-desk-home.png)
+
+**A clean pass** — "How is NVIDIA exposed to export controls in China?"
+resolves in one writer draft. Every paragraph carries inline citation chips
+back to the specific 10-K chunk it came from:
+
+![Answer with inline citation chips](docs/screenshots/answer-with-citations.png)
+
+The agent trail underneath shows exactly what ran: one planner subtask, four
+retrieved chunks, a single writer draft, and a critic `PASS` — 5 nodes total,
+0 retrieval expansions, 2 citations:
+
+![Agent trail for a passing run](docs/screenshots/agent-trail-pass.png)
+
+**A harder, multi-part query** exercises the actual point of this project —
+the revise/re-retrieve loop. Here the critic fails the draft twice in a row,
+the writer gets two shots at revising against the same evidence, and once
+the revision budget (`MAX_WRITER_REVISIONS=2`) is exhausted the graph
+force-finalizes rather than looping forever:
+
+![Agent trail showing a critic FAIL loop that gets force-finalized](docs/screenshots/agent-trail-force-finalized.png)
+
+The finalizer surfaces *why* it gave up as a visible caveat instead of
+silently shipping a shaky answer — here, the programmatic citation-coverage
+check (77% of sentences cited vs. an 80% floor) is what kept failing, even
+though the LLM critic judged the underlying claims correct:
+
+![Force-finalize caveat with critic feedback](docs/screenshots/force-finalize-note.png)
+
+This is the "no uncited claims reach the user" guarantee from the
+[Why this project](#why-this-project-vs-a-single-agent-rag-assistant) section
+in action: when the critic and the programmatic check disagree on strictness,
+the system is honest about it rather than picking whichever one passes.
+
+**The test suite backing all of this** — the offline `pytest tests/` run
+referenced throughout this README (see [Testing](#mlops)), mock-provider
+only, no API keys needed:
+
+![Test suite passing](docs/screenshots/test_result.png)
 
 ## Architecture
 
@@ -31,7 +82,8 @@ flowchart TD
 `MAX_WRITER_REVISIONS` times and back to the retriever
 `MAX_RETRIEVAL_EXPANSIONS` times (both configurable, defaults 2 and 1). Once
 both budgets are exhausted the graph force-finalizes with a visible caveat
-rather than looping forever — verified in `tests/test_graph.py`.
+rather than looping forever — verified in `tests/test_graph.py`, and visible
+live in the demo screenshots above.
 
 ### State schema
 
@@ -39,7 +91,8 @@ See `src/graph/state.py` for the full typed `GraphState`. Key fields:
 `query`, `subtasks`, `retrieved_chunks` (with scores + section tags),
 `draft_answer`, `critic_verdict` (verdict/feedback/route_to), `revision_count`,
 `retrieval_expansion_count`, `final_answer`, `citations`, and an append-only
-`trace` log used for the API's "which nodes ran" field.
+`trace` log used for the API's "which nodes ran" field (this is what powers
+the agent-trail cards in the demo UI).
 
 ## Why this project (vs. a single-agent RAG assistant)
 
@@ -77,6 +130,14 @@ Or with Docker:
 docker compose up --build
 ```
 
+### Trying it with the demo UI
+
+`research-desk.html` at the repo root is a static, dependency-free page (the
+one in the screenshots above) that hits the same `/query` and `/health`
+endpoints as the `curl` example. With the API running on `localhost:8000`,
+just open the file directly in a browser — no separate frontend build or
+server required.
+
 ### Running with no API key at all
 
 Set `LLM_PROVIDER=mock` in `.env` (or `export LLM_PROVIDER=mock`) and every
@@ -88,16 +149,18 @@ obviously won't be meaningful in mock mode; use a real provider for that.
 ## Provider swapping
 
 Every external call is behind an interface (`src/providers/base.py`).
-Nothing in `src/graph/` imports `anthropic` or `openai` directly.
+Nothing in `src/graph/` imports `anthropic`, `openai`, or `google-genai`
+directly.
 
 ```bash
 LLM_PROVIDER=openai OPENAI_MODEL=gpt-4o-mini uvicorn src.api.main:app
+LLM_PROVIDER=gemini GEMINI_MODEL=gemini-3-flash-preview uvicorn src.api.main:app
 EMBEDDING_PROVIDER=sentence-transformers uvicorn src.api.main:app   # needs a one-time model download
 ```
 
 | Setting | Options | Notes |
 |---|---|---|
-| `LLM_PROVIDER` | `anthropic` \| `openai` \| `mock` | `mock` needs no key, used by tests/CI |
+| `LLM_PROVIDER` | `anthropic` \| `openai` \| `gemini` \| `mock` | `mock` needs no key, used by tests/CI. `gemini` is backed by the `google-genai` SDK (see `requirements.txt`) — the demo screenshots above were run against `gemini-3-flash-preview`. |
 | `EMBEDDING_PROVIDER` | `local-tfidf` \| `sentence-transformers` \| `openai` | see below |
 
 **On `local-tfidf` as the default embedding provider:** it's not a placeholder
@@ -123,10 +186,10 @@ interface is identical, only the config string changes.
 ├── src/graph/             typed state, 5 nodes, graph assembly + routing
 ├── src/prompts/           planner/writer/critic prompt templates (not inlined in code)
 ├── src/api/                FastAPI app (/query, /health)
+├── research-desk.html     static demo frontend (no build step, hits /query + /health)
 ├── eval/                   RAGAS harness + held-out QA test set
 ├── tests/                  17 tests, all offline (mock provider)
 ├── deploy/                 ECS task def + Lambda handler (not auto-deployed)
-└── .github/workflows/      CI: lint, build index, test, docker build, RAGAS gate
 ```
 
 ## Rebuilding the corpus / index
@@ -180,7 +243,8 @@ app depends on. Documented inline in `requirements.txt` in case a future
 - **Structured logging**: every node emits a trace entry (`node`,
   `duration_s`, `output_summary`, provider name) collected in `GraphState.trace`
   and returned in the API response, so any run is inspectable without
-  re-running it.
+  re-running it — this is the same trace data the demo UI's "agent trail"
+  cards render.
 
 ## Deploying to AWS
 
@@ -198,18 +262,24 @@ infrastructure.
   package past Lambda's size limits unless you use the container-image
   deployment path (also documented in that file's docstring).
 
+The `Dockerfile` builds the FAISS index at image-build time (`local-tfidf`
+by default, overridable via the `EMBEDDING_PROVIDER` build arg) so the
+container starts ready to serve, defaults `LLM_PROVIDER=anthropic` at
+runtime, and exposes a `/health`-based `HEALTHCHECK` on port 8000.
+
 ## What this demonstrates (for recruiters / portfolio)
 
 - **Multi-agent orchestration, not single-shot RAG**: a 5-node LangGraph
   graph with genuine conditional routing — the critic can send work back to
   either the writer (rewrite) or the retriever (get better evidence), with
-  bounded retry budgets that guarantee termination (unit-tested).
+  bounded retry budgets that guarantee termination (unit-tested, and visible
+  in the demo's force-finalize screenshot above).
 - **Grounded, self-verified answers**: a programmatic citation-coverage floor
   backs up the LLM critic, so the "no uncited claims" property doesn't
   depend entirely on the critic's judgment.
-- **Provider-agnostic design**: swapping `LLM_PROVIDER` or
-  `EMBEDDING_PROVIDER` touches zero graph/node code — verified by the mock
-  provider being what the entire test suite runs against.
+- **Provider-agnostic design**: swapping `LLM_PROVIDER` (Anthropic, OpenAI,
+  or Gemini) or `EMBEDDING_PROVIDER` touches zero graph/node code — verified
+  by the mock provider being what the entire test suite runs against.
 - **Real MLOps hygiene**: CI that lints, tests offline, builds the container,
   and gates on RAGAS scores; per-query run tracking; structured, inspectable
   traces.
